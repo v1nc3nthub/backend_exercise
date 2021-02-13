@@ -1,0 +1,49 @@
+--1 Cosa si intende per API REST
+Un'api REST è un servizio che consente di effettuare operazioni CRUD su entità ben definite.
+REST utilizza il protocollo http, per questo motivo l'utente può accedervi utilizzando i classici metodi del protocollo http.
+
+--2 Cosa si intende per servizio SOAP
+SOAP è un protocollo basato XML e utilizzato per lo sviluppo di API.
+SOAP non usa http, per questo motivo è necessario creare degli appositi messaggi in formato XML che vengono scambiati tra il client ed il server.
+E' necessario definire l'interfaccia di accesso ai servizi, Web Service Description Language.
+Utilizza chiamate di procedure remote per l'accesso ai servizi.
+
+--3 Cos'è un database relazionale
+Database nel quale valgono i principi di entità e relazioni, ovvero le entità presenti al suo interno sono correlate tra loro.
+Inoltre, un db relazionale ha sempre almeno uno schema, risulta efficiente per il salvataggio dati strutturati,
+è possibile scalarlo verticalmente aumentando cpu/ram.
+Esempi di db relazionali: mysql, postgresql, db2, sqlserver.
+
+--4 Cos'è un database NoSQL
+Per NoSQL si intende un db non relazionale, ovvero dove gli elementi al suo interno non hanno una correlazione tra loro.
+Nello specifico, i db appartenenti a questa categoria presentano svariate forme di salvataggio dei dati, essendo questi non strutturati.
+Il linguaggio SQL non può essere utilizzato per accedere ai dati memorizzati al loro interno.
+Tipicamente vengono memorizzati dati in formato JSON, oppure nella forma chiave-valore (redis, cosmosdb, couchbase: key-object).
+Questa tipologia di db è scalabile orizzontalmente, ad esempio aumentando il numero di server.
+Esempi di db NoSQL: redis, couchbase, cosmosdb, mongodb, hbase.
+
+--5 Cos'è un ORM ? Fai almeno un esempio
+Un ORM è un Object Relation Management e viene utilizzato per astrarre la comunicazione tra il server e il database sottostante.
+Uno dei più famosi ORM per java è Hibernate, che mediante il suo subset di librerie consente di effettuare le classiche operazioni CRUD su db.
+
+--6 Cos'è la SQL Injection
+E' una tecnica utilizzata per effettuare query "malevole" sul db.
+Un tipico esempio è il seguente: "select * from users where userId = "+userId.
+Se userId = "12", allora non c'è alcun sql injection.
+Se invece userId = "12 OR 1 = 1", poichè la condizione 1=1 è sempre verificata,
+si potrebbe accedere a tutti i record del db pur non avendone il consenso.
+Per ovviare al problema è importante utilizzare query parametrizzate, in modo da evitare qualsiasi possibile "intrusione" malevola.
+"select * from users where userId = ?1", param1=12;
+
+--7 Cos'è l'autenticazione a 2 fattori? Descrivi brevemente un esempio
+L'autenticazione a due fattori o MFA è quel meccanismo che consente l'autenticazione mediante un dispositivo associato all'utente,
+di cui si è certificata la proprietà.
+Un tipico esempio è l'acquisto di un prodotto online mediante la carta di credito VISA, autorizzazione che viene concessa
+soltanto mediante invio di codice OTP da VISA_Provider -> Utente ed inserimento dello stesso nella pagina web che sta richiedendo la transazione
+a VISA.
+
+--8 Descrivi brevemente un metodo sicuro per salvare le password degli utenti sul DB
+Utilizzare l'algoritmo sha256 insieme ad un SALT randomico, generato ogni volta che viene richiesto il salvataggio nel DB.
+In questo modo, utilizzando il salt, le pwd, anche se inizialmente identiche, verranno memorizzate con due hash differenti.
+
+--9 Cos'è una Sticky Session in un sistema con Load Balancing
